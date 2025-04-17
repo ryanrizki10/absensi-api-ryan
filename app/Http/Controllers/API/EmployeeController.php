@@ -48,6 +48,7 @@ class EmployeeController extends Controller
                 'address' => $request->address,
                 'is_active' => $request->is_active,
                 'gender' => $request->gender,
+                'nip' => $request->nip,
             ]);
             return response()->json(['success' => true, 'message' => 'Employees added successfully', 'data' => $employees]);
         } catch (\Throwable $th) {
@@ -91,6 +92,7 @@ class EmployeeController extends Controller
                 'address' => $request->address,
                 'is_active' => $request->is_active,
                 'gender' => $request->gender,
+                'nip' => $request->nip,
             ];
 
             $employees = Employees::findOrFail($id);
@@ -102,6 +104,19 @@ class EmployeeController extends Controller
         }
 
     }
+
+    public function destroy($id)
+    {
+        try {
+            $employees = Employees::findOrFail($id)->delete();
+            return response()->json(['message' => 'Employees deleted successfully']);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th->getMessage()], 500);
+        }
+    }
+
+    // Method: delete
+    // endpoint:
 
 
 }
